@@ -1,0 +1,166 @@
+{
+  "info": {
+    "name": "API To-Do List",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            ""
+          ]
+        }
+      }
+    },
+    {
+      "name": "Criar Tarefa",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"titulo\":\"Estudar Sequelize\",\"descricao\":\"Entender migrations\",\"status\":\"a fazer\"}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/tarefas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "tarefas"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar Tarefas",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/tarefas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "tarefas"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Buscar Tarefa por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/tarefas/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "tarefas",
+            ":id"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Atualizar Tarefa (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"titulo\":\"Atualizado\",\"descricao\":\"...\",\"status\":\"em andamento\"}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/tarefas/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "tarefas",
+            ":id"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Atualizar Status (PATCH)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"status\":\"conclu\u00edda\"}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/tarefas/:id/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "tarefas",
+            ":id",
+            "status"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Deletar Tarefa",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/tarefas/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "tarefas",
+            ":id"
+          ]
+        }
+      }
+    }
+  ]
+}
