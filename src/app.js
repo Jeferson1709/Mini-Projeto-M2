@@ -1,23 +1,38 @@
-require('dotenv').config(); // carrega variáveis de ambiente do arquivo .env para process.env
-const express = require('express'); // importa o framework web Express
-const morgan = require('morgan'); // importa o middleware de logging HTTP morgan
+require('dotenv').config();
+const express = require('express');
+const morgan = require('morgan');
 const cors = require('cors');
-const tarefasRoutes = require('./routes/tarefas'); // importa as rotas relacionadas a "tarefas"
-const { sequelize } = require('./models'); // importa a instância do Sequelize (conexão com o DB)
+const tarefasRoutes = require('./routes/tarefas');
 
-const app = express(); // cria a aplicação Express
-app.use(cors()); //
-app.use(morgan('dev')); // registra requisições no console usando o formato 'dev'
-app.use(express.json()); // habilita o parsing de JSON no corpo das requisições
+const app = express();
 
-app.get('/', (req, res) => res.json({ message: 'API To-Do List funcionando' })); // rota GET na raiz que retorna uma mensagem de status
 
-app.use('/tarefas', tarefasRoutes); // monta as rotas de tarefas sob o prefixo '/tarefas'
+app.use(cors({
+  origin: '*',
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}));
 
-// error handler simples
-app.use((err, req, res, next) => {
-  console.error(err); // loga o erro no console
-  res.status(500).json({ message: 'Erro interno.' }); // responde com status 500 e mensagem genérica
+
+app.options('*', cors());
+
+// 🔥 DESATIVAR CACHE (resolve o 304 que tava te sabotando)
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  next();
 });
 
-module.exports = app; // exporta a instância do app para uso em outros arquivos (por exemplo servidor)
+app.use(morgan('dev'));
+app.use(express.json());
+
+app.get('/', (req, res) => res.json({ message: 'API To-Do List funcionando' }));
+
+app.use('/tarefas', tarefasRoutes);
+
+// error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ message: 'Erro interno.' });
+});
+
+module.exports = app;
