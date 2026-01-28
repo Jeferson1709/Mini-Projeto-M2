@@ -9,14 +9,14 @@ const app = express();
 
 app.use(cors({
   origin: '*',
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type']
 }));
 
 
 app.options('*', cors());
 
-// 🔥 DESATIVAR CACHE (resolve o 304 que tava te sabotando)
+
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
   next();
